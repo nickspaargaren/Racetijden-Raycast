@@ -1,5 +1,5 @@
-import { ActionPanel, List, Action } from "@raycast/api";
-import { useFetch } from "@raycast/utils";
+import { ActionPanel, List, Action } from '@raycast/api'
+import { useFetch } from '@raycast/utils'
 
 type Circuit = {
   name: string;
@@ -21,11 +21,11 @@ type circuitData = {
   };
 };
 
-export default function Command() {
+export default function Command () {
   const {
     isLoading,
-    data,
-  }: circuitData = useFetch("https://f1.racetijden.nl/api/circuits");
+    data
+  }: circuitData = useFetch('https://f1.racetijden.nl/api/circuits')
 
   if (!data?.success) {
     return
@@ -38,14 +38,14 @@ export default function Command() {
           key={index}
           icon={`https://f1.racetijden.nl/_next/image?url=%2Fimages%2Fflags%2F${item.flag}.png&w=64&q=75`}
           title={item.name}
-          subtitle={item.times.length ? item.times[0].time : ""}
+          subtitle={item.times.length ? item.times[0].time : ''}
           actions={
             <ActionPanel>
-              <Action.OpenInBrowser url={`https://f1.racetijden.nl/circuits/${item.name.replaceAll(" ", "%20")}`} />
+              <Action.OpenInBrowser url={`https://f1.racetijden.nl/circuits/${item.name.replaceAll(' ', '%20')}`} />
             </ActionPanel>
           }
         />
       ))}
     </List>
-  );
+  )
 }
